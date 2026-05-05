@@ -1,46 +1,40 @@
 <div align="center">
-<h1>📘 Code Quiz</h1>
-<p><strong>Interactive Trading Platform</strong></p>
-<p>Test your skills in a seamless trading environment</p>
-
-<!-- Badges can be added here -->
-<img src="https://img.shields.io/badge/Next.js-14-black" alt="Next.js 14" />
-<img src="https://img.shields.io/badge/React-18-blue" alt="React 18" />
-<img src="https://img.shields.io/badge/TypeScript-5.0-blue" alt="TypeScript" />
-<img <img src="https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC" alt="Tailwind CSS" />
-<img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License" />
+  <h1>📘 CodeExam</h1>
+  <p><strong>Interactive Programming Assessment Platform</strong></p>
+  <p>Test your coding skills in a modern, smooth environment</p>
+  
+  <img src="https://img.shields.io/badge/Next.js-14-black" alt="Next.js 14" />
+  <img src="https://img.shields.io/badge/React-18-blue" alt="React 18" />
+  <img src="https://img.shields.io/badge/TypeScript-5.0-blue" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License" />
 </div>
 
 ---
 
-## 📖 About the Project
+## 📖 About The Project
 
-**CodeExam** is an interactive web application designed to provide fluid programming across various platforms (web, backend, mobile, and general programming). It is designed to be user-friendly, fast, and visually appealing with animations.
+**CodeExam** is an interactive web application designed to deliver programming tests across multiple domains (Web, Backend, Mobile, General Programming). It is built to be user‑friendly, high‑performing, and visually engaging with smooth animations.
 
 ---
 
 ## ✨ Key Features
 
-- ✅ Categorized by domain (Front-end, Back-end, Mobile, Programming Fundamentals)
+- ✅ Tests categorized by domain (Frontend, Backend, Mobile, Programming basics)
 - ✅ Modern UI using **Tailwind CSS** and **GSAP** for animations
-- ✅ Fast and impressive **Next.js App Router** app experience
-- ✅ Secure writing using **TypeScript**
-- ✅ Responsive design
+- ✅ Fast app experience thanks to **Next.js App Router**
+- ✅ Type safety with **TypeScript**
+- ✅ Fully responsive design for all devices
 
 ---
 
-## 🛠️ Usage Tips
+## 🛠️ Technologies Used
 
-| Technical | Version | Meat |
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| Next.js    | 14      | Core framework |
+| React      | 18      | UI library |
+| TypeScript | 5       | Type safety & stability |
+| Tailwind CSS | 3.4  | Styling & layout |
+| GSAP       | 3.12    | Animations & effects |
 
-|---------|--------|--------|
-
-| Next.js | 14 | Core Framework |
-
-| Reply | 18 | Interface Library |
-
-| TypeScript | 5 | Security |
-
-| Back-end CSS | 3.4 | Design and Formatting |
-
-| GsAP | 3.12 | Gravity and Effects |
