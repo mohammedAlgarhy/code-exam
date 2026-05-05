@@ -1,0 +1,190 @@
+﻿"use client";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
+
+const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const { user, isLoading, logout } = useAuth();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
+
+  // تعريف قوائم الاختبارات (لن تظهر إلا إذا كان المستخدم مسجلاً)
+  const specialties = {
+    "Programming": [
+      { name: "JavaScript", href: "/tests/programming/javascript", level: "Beginner" },
+      { name: "Python", href: "/tests/programming/python", level: "Beginner" },
+      { name: "Java", href: "/tests/programming/java", level: "Intermediate" },
+      { name: "TypeScript", href: "/tests/programming/typescript", level: "Intermediate" },
+      { name: "C++", href: "/tests/programming/cpp", level: "Advanced" },
+      { name: "C#", href: "/tests/programming/csharp", level: "Intermediate" },
+      { name: "Go", href: "/tests/programming/go", level: "Intermediate" },
+    ],
+    "Web Development": [
+      { name: "React.js", href: "/tests/web-development/react", level: "Intermediate" },
+      { name: "Next.js", href: "/tests/web-development/nextjs", level: "Advanced" },
+      { name: "Vue.js", href: "/tests/web-development/vue", level: "Intermediate" },
+      { name: "Angular", href: "/tests/web-development/angular", level: "Advanced" },
+      { name: "HTML5", href: "/tests/web-development/html", level: "Beginner" },
+      { name: "CSS3", href: "/tests/web-development/css", level: "Beginner" },
+      { name: "Tailwind CSS", href: "/tests/web-development/tailwind", level: "Beginner" },
+      { name: "Bootstrap", href: "/tests/web-development/bootstrap", level: "Beginner" },
+    ],
+    "Mobile": [
+      { name: "React Native", href: "/tests/mobile/react-native", level: "Intermediate" },
+      { name: "Flutter", href: "/tests/mobile/flutter", level: "Intermediate" },
+      { name: "SwiftUI", href: "/tests/mobile/swiftui", level: "Advanced" },
+      { name: "Kotlin Multiplatform", href: "/tests/mobile/kotlin-multiplatform", level: "Advanced" },
+    ],
+    "Backend": [
+      { name: "Node.js", href: "/tests/backend/nodejs", level: "Intermediate" },
+      { name: "Express.js", href: "/tests/backend/express", level: "Intermediate" },
+      { name: "Django", href: "/tests/backend/django", level: "Advanced" },
+      { name: "Laravel", href: "/tests/backend/laravel", level: "Intermediate" },
+      { name: "Spring Boot", href: "/tests/backend/spring", level: "Advanced" },
+      { name: "SQL", href: "/tests/backend/sql", level: "Beginner" },
+      { name: "MongoDB", href: "/tests/backend/mongodb", level: "Intermediate" },
+      { name: "Docker", href: "/tests/backend/docker", level: "Advanced" },
+    ],
+  };
+
+  const mainLinks = [
+    { name: "Leaderboard", href: "/leaderboard" },
+    { name: "My Results", href: "/my-results" },
+    { name: "Certificates", href: "/certificates" },
+  ];
+
+  // إذا كان المستخدم غير مسجل، نعرض فقط الشعار وأزرار الدخول/الاشتراك
+  if (!isLoading && !user) {
+    return (
+      <>
+        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white shadow-md border-b" : "bg-white/98 backdrop-blur-sm border-b"}`}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-16">
+              {/* Logo */}
+              <Link href="/" className="flex items-center gap-2">
+                <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  Code<span className="text-gray-900">Exam</span>
+                </span>
+              </Link>
+
+              {/* Auth Buttons (Only) */}
+              <div className="flex items-center gap-3">
+                <Link href="/login" className="text-gray-700 hover:text-blue-600">Login</Link>
+                <Link href="/register" className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Sign Up</Link>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div className="h-16" />
+      </>
+    );
+  }
+
+  return (
+    <>
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white shadow-md border-b" : "bg-white/98 backdrop-blur-sm border-b"}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2">
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Code<span className="text-gray-900">Exam</span>
+              </span>
+            </Link>
+
+            {/* Desktop Menu (Full) */}
+            <div className="hidden lg:flex items-center gap-4">
+              {Object.entries(specialties).map(([specialty, languages]) => (
+                <div key={specialty} className="relative group">
+                  <button className="text-gray-800 hover:text-blue-600 font-medium">
+                    {specialty} ▼
+                  </button>
+                  <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                    {languages.map((lang) => (
+                      <Link key={lang.href} href={lang.href} className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">
+                        {lang.name} <span className="text-xs text-gray-400">({lang.level})</span>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              {mainLinks.map((link) => (
+                <Link key={link.href} href={link.href} className={`text-gray-800 hover:text-blue-600 font-medium ${pathname === link.href ? "text-blue-600" : ""}`}>
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+
+            {/* Auth Section (Logged in) */}
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3">
+                <span className="text-sm text-gray-700">👋 {user?.name}</span>
+                <button
+                  onClick={() => { /* logout handled via useAuth, but we'll add a logout function later */ }}
+                  className="px-3 py-1.5 text-xs bg-red-500 text-white rounded-md hover:bg-red-600 transition"
+                >
+                  Logout
+                </button>
+              </div>
+              <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="lg:hidden">
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  {isMobileMenuOpen ? <path d="M6 18L18 6M6 6l12 12" /> : <path d="M4 6h16M4 12h16M4 18h16" />}
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu (Full) */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden bg-white border-t p-4 space-y-3">
+            {Object.entries(specialties).map(([specialty, languages]) => (
+              <div key={specialty}>
+                <div className="font-bold text-gray-900 mb-2">{specialty}</div>
+                {languages.map((lang) => (
+                  <Link key={lang.href} href={lang.href} className="block py-1 text-gray-600 hover:text-blue-600">
+                    {lang.name}
+                  </Link>
+                ))}
+              </div>
+            ))}
+            <div className="border-t pt-3">
+              {mainLinks.map((link) => (
+                <Link key={link.href} href={link.href} className="block py-1 text-gray-600 hover:text-blue-600">
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+            <div className="border-t pt-3 flex items-center justify-between">
+              <span className="text-gray-700">👋 {user?.name}</span>
+              <button
+                onClick={() => { logout }}
+                className="px-3 py-1 text-xs bg-red-500 text-white rounded-md"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
+        )}
+      </nav>
+      <div className="h-16" />
+    </>
+  );
+};
+
+export default Navbar;
+

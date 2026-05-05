@@ -1,0 +1,278 @@
+﻿"use client";
+import { useEffect, useRef } from "react";
+import Link from "next/link";
+import gsap from "gsap";
+import ProtectedRoute from "@/components/ProtectedRoute";
+
+// جميع الأيقونات من lucide-react
+import {
+  Code,
+  Braces,
+  Coffee,
+  FileJson,
+  Cpu,
+  Hash,
+  Terminal,
+  Globe,
+  Rocket,
+  Eye,
+  Anchor,
+  FileCode,
+  Palette,
+  Wind,
+  Box,
+  Smartphone,
+  Droplet,
+  Apple,
+  Target,
+  Database,
+  Server,
+  Music,
+  Feather,
+  Leaf,
+  Container,
+  Zap,
+  Ship,
+  Key,
+} from "lucide-react";
+
+// تعريف أيقونات لكل اختبار (كلها من lucide-react)
+const iconMap: Record<string, JSX.Element> = {
+  javascript: <Code className="text-yellow-400" size={24} />,
+  python: <Braces className="text-blue-400" size={24} />,
+  java: <Coffee className="text-red-500" size={24} />,
+  typescript: <FileJson className="text-blue-600" size={24} />,
+  cpp: <Cpu className="text-blue-500" size={24} />,
+  csharp: <Hash className="text-purple-500" size={24} />,
+  go: <Terminal className="text-cyan-400" size={24} />,
+  react: <Code className="text-cyan-400" size={24} />,
+  nextjs: <Rocket className="text-white" size={24} />,
+  vue: <Eye className="text-green-500" size={24} />,
+  angular: <Anchor className="text-red-500" size={24} />,
+  html: <FileCode className="text-orange-500" size={24} />,
+  css: <Palette className="text-blue-400" size={24} />,
+  tailwind: <Wind className="text-sky-400" size={24} />,
+  bootstrap: <Box className="text-purple-500" size={24} />,
+  "react-native": <Smartphone className="text-blue-500" size={24} />,
+  flutter: <Droplet className="text-sky-400" size={24} />,
+  swiftui: <Apple className="text-orange-500" size={24} />,
+  "kotlin-multiplatform": <Target className="text-purple-500" size={24} />,
+  nodejs: <Server className="text-green-600" size={24} />,
+  express: <Zap className="text-white" size={24} />,
+  django: <Music className="text-green-700" size={24} />,
+  laravel: <Feather className="text-red-500" size={24} />,
+  spring: <Leaf className="text-green-600" size={24} />,
+  sql: <Database className="text-blue-400" size={24} />,
+  mongodb: <Leaf className="text-green-500" size={24} />,
+  docker: <Container className="text-blue-400" size={24} />,
+  redis: <Key className="text-red-600" size={24} />,
+  kubernetes: <Ship className="text-blue-500" size={24} />,
+};
+
+const specialties = [
+  {
+    name: "Programming",
+    slug: "programming",
+    icon: <Code className="w-8 h-8" />,
+    description: "Master core programming languages",
+    color: "from-blue-500 to-cyan-500",
+    tests: [
+      { id: "javascript", name: "JavaScript", level: "Beginner", questions: 20, path: "/tests/programming/javascript" },
+      { id: "python", name: "Python", level: "Beginner", questions: 20, path: "/tests/programming/python" },
+      { id: "java", name: "Java", level: "Intermediate", questions: 20, path: "/tests/programming/java" },
+      { id: "typescript", name: "TypeScript", level: "Intermediate", questions: 20, path: "/tests/programming/typescript" },
+      { id: "cpp", name: "C++", level: "Advanced", questions: 20, path: "/tests/programming/cpp" },
+      { id: "csharp", name: "C#", level: "Intermediate", questions: 20, path: "/tests/programming/csharp" },
+      { id: "go", name: "Go", level: "Intermediate", questions: 20, path: "/tests/programming/go" },
+    ]
+  },
+  {
+    name: "Web Development",
+    slug: "web-development",
+    icon: <Globe className="w-8 h-8" />,
+    description: "Frontend and Web Technologies",
+    color: "from-purple-500 to-pink-500",
+    tests: [
+      { id: "react", name: "React.js", level: "Intermediate", questions: 20, path: "/tests/web-development/react" },
+      { id: "nextjs", name: "Next.js", level: "Advanced", questions: 20, path: "/tests/web-development/nextjs" },
+      { id: "vue", name: "Vue.js", level: "Intermediate", questions: 20, path: "/tests/web-development/vue" },
+      { id: "angular", name: "Angular", level: "Advanced", questions: 20, path: "/tests/web-development/angular" },
+      { id: "html", name: "HTML5", level: "Beginner", questions: 20, path: "/tests/web-development/html" },
+      { id: "css", name: "CSS3", level: "Beginner", questions: 20, path: "/tests/web-development/css" },
+      { id: "tailwind", name: "Tailwind CSS", level: "Beginner", questions: 20, path: "/tests/web-development/tailwind" },
+      { id: "bootstrap", name: "Bootstrap", level: "Beginner", questions: 20, path: "/tests/web-development/bootstrap" },
+    ]
+  },
+  {
+    name: "Mobile",
+    slug: "mobile",
+    icon: <Smartphone className="w-8 h-8" />,
+    description: "Cross-platform and Native Mobile",
+    color: "from-green-500 to-emerald-500",
+    tests: [
+      { id: "react-native", name: "React Native", level: "Intermediate", questions: 20, path: "/tests/mobile/react-native" },
+      { id: "flutter", name: "Flutter", level: "Intermediate", questions: 20, path: "/tests/mobile/flutter" },
+      { id: "swiftui", name: "SwiftUI", level: "Advanced", questions: 20, path: "/tests/mobile/swiftui" },
+      { id: "kotlin-multiplatform", name: "Kotlin Multiplatform", level: "Advanced", questions: 20, path: "/tests/mobile/kotlin-multiplatform" },
+    ]
+  },
+  {
+    name: "Backend",
+    slug: "backend",
+    icon: <Server className="w-8 h-8" />,
+    description: "Server-side Technologies & Databases",
+    color: "from-orange-500 to-red-500",
+    tests: [
+      { id: "nodejs", name: "Node.js", level: "Intermediate", questions: 20, path: "/tests/backend/nodejs" },
+      { id: "express", name: "Express.js", level: "Intermediate", questions: 20, path: "/tests/backend/express" },
+      { id: "django", name: "Django", level: "Advanced", questions: 20, path: "/tests/backend/django" },
+      { id: "laravel", name: "Laravel", level: "Intermediate", questions: 20, path: "/tests/backend/laravel" },
+      { id: "spring", name: "Spring Boot", level: "Advanced", questions: 20, path: "/tests/backend/spring" },
+      { id: "sql", name: "SQL", level: "Beginner", questions: 20, path: "/tests/backend/sql" },
+      { id: "mongodb", name: "MongoDB", level: "Intermediate", questions: 20, path: "/tests/backend/mongodb" },
+      { id: "docker", name: "Docker", level: "Advanced", questions: 20, path: "/tests/backend/docker" },
+      { id: "redis", name: "Redis", level: "Advanced", questions: 20, path: "/tests/backend/redis" },
+      { id: "kubernetes", name: "Kubernetes", level: "Expert", questions: 20, path: "/tests/backend/kubernetes" },
+    ]
+  }
+];
+
+const getLevelColor = (level: string) => {
+  switch(level) {
+    case "Beginner": return "text-green-400 bg-green-900/30";
+    case "Intermediate": return "text-yellow-400 bg-yellow-900/30";
+    case "Advanced": return "text-orange-400 bg-orange-900/30";
+    case "Expert": return "text-purple-400 bg-purple-900/30";
+    default: return "text-gray-400 bg-gray-800/30";
+  }
+};
+
+export default function TestsPage() {
+  const headerRef = useRef(null);
+  const statsRef = useRef(null);
+  const sectionsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // هيدر: دوران 90 درجة إلى 0 (مدة 5 ثوانٍ)
+      gsap.set(headerRef.current, { rotateX: 90, opacity: 0, transformOrigin: "center top" });
+      gsap.to(headerRef.current, {
+        rotateX: 0,
+        opacity: 1,
+        duration: 5,
+        ease: "back.out(1.2)",
+        delay: 0.2,
+      });
+
+      // البطاقات الإحصائية: مدة 5 ثوانٍ لكل بطاقة، تباعد 1 ثانية
+      const statCards = statsRef.current?.children;
+      if (statCards) {
+        gsap.set(statCards, { rotateX: 90, opacity: 0, transformOrigin: "center top" });
+        gsap.to(statCards, {
+          rotateX: 0,
+          opacity: 1,
+          duration: 5,
+          stagger: 1,
+          ease: "back.out(1.2)",
+          delay: 0.4,
+        });
+      }
+
+      // أقسام التخصصات: مدة 5 ثوانٍ لكل قسم، تأخير متتالي بفارق 0.5 ثانية
+      sectionsRef.current.forEach((section, idx) => {
+        if (section) {
+          gsap.set(section, { rotateX: 90, opacity: 0, transformOrigin: "center top" });
+          gsap.to(section, {
+            rotateX: 0,
+            opacity: 1,
+            duration: 5,
+            delay: 1 + idx * 0.5,
+            ease: "back.out(1.2)",
+          });
+        }
+      });
+    });
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <ProtectedRoute>
+        <div className="min-h-screen bg-[#000000] text-white p-4">
+        <div className="max-w-7xl mx-auto py-12">
+          {/* الهيدر يظل في المنتصف */}
+          <div className="text-center mb-12">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-cyan-500 to-teal-400 bg-clip-text text-transparent">
+              Programming Tests
+            </h1>
+            <p className="text-xl text-gray-300">
+              Choose your specialty and test your knowledge
+            </p>
+          </div>
+
+          {/* إحصائيات */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 text-center border border-white/10">
+              <div className="text-3xl font-bold text-cyan-400">27+</div>
+              <div className="text-sm text-gray-400">Tests</div>
+            </div>
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 text-center border border-white/10">
+              <div className="text-3xl font-bold text-yellow-400">540+</div>
+              <div className="text-sm text-gray-400">Questions</div>
+            </div>
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 text-center border border-white/10">
+              <div className="text-3xl font-bold text-green-400">1 min</div>
+              <div className="text-sm text-gray-400">Per Question</div>
+            </div>
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 text-center border border-white/10">
+              <div className="text-3xl font-bold text-purple-400">70%</div>
+              <div className="text-sm text-gray-400">To Pass</div>
+            </div>
+          </div>
+
+          {/* التخصصات - الآن العنوان على اليمين */}
+          {specialties.map((specialty) => (
+            <div key={specialty.name} className="mb-16">
+              {/* هنا نعكس الترتيب بحيث الأيقونة في اليسار والنص في اليمين */}
+              <div className="flex flex-row-reverse justify-between items-center mb-6">
+                <div className="flex items-center gap-3 text-right">
+                  <div>
+                    <h2 className="text-2xl font-bold">{specialty.name}</h2>
+                    <p className="text-sm text-gray-400">اختر الاختبار المناسب</p>
+                  </div>
+                  <div className={`w-12 h-12 bg-gradient-to-r ${specialty.color} rounded-xl flex items-center justify-center text-2xl shadow-lg`}>
+                    {specialty.icon}
+                  </div>
+                </div>
+              </div>
+              
+              {/* شبكة الاختبارات */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {specialty.tests.map((test) => (
+                  <Link
+                    key={test.path}
+                    href={test.path}
+                    className="group bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:border-cyan-500/50 transition-all hover:scale-105 hover:shadow-xl hover:bg-white/10"
+                  >
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="text-3xl">{test.icon}</div>
+                      <span className="text-xs px-2 py-1 rounded-full bg-gray-800 text-gray-300">20 Qs</span>
+                    </div>
+                    <h3 className="text-lg font-bold mb-2 text-white group-hover:text-cyan-300 transition">{test.name}</h3>
+                    <div className="flex justify-between items-center">
+                      <span className={`text-xs px-2 py-0.5 rounded-full ${getLevelColor(test.level)}`}>
+                        {test.level}
+                      </span>
+                      <span className="text-cyan-400 opacity-0 group-hover:opacity-100 transition-all group-hover:translate-x-1">
+                        →
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </ProtectedRoute>
+  );
+}
