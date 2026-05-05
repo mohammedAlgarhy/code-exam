@@ -1,58 +1,46 @@
 <div align="center">
-  <h1>📘 CodeExam</h1>
-  <p><strong>منصة اختبارات البرمجة التفاعلية</strong></p>
-  <p>اختبر مهاراتك البرمجية في بيئة عصرية وسلسة</p>
-  
-  <!-- يمكن إضافة شارات (badges) هنا -->
-  <img src="https://img.shields.io/badge/Next.js-14-black" alt="Next.js 14" />
-  <img src="https://img.shields.io/badge/React-18-blue" alt="React 18" />
-  <img src="https://img.shields.io/badge/TypeScript-5.0-blue" alt="TypeScript" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC" alt="Tailwind CSS" />
-  <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License" />
+<h1>📘 Code Quiz</h1>
+<p><strong>Interactive Trading Platform</strong></p>
+<p>Test your skills in a seamless trading environment</p>
+
+<!-- Badges can be added here -->
+<img src="https://img.shields.io/badge/Next.js-14-black" alt="Next.js 14" />
+<img src="https://img.shields.io/badge/React-18-blue" alt="React 18" />
+<img src="https://img.shields.io/badge/TypeScript-5.0-blue" alt="TypeScript" />
+<img <img src="https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC" alt="Tailwind CSS" />
+<img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License" />
 </div>
 
 ---
 
-## 📖 عن المشروع
+## 📖 About the Project
 
-**CodeExam** هو تطبيق ويب تفاعلي يهدف إلى تقديم اختبارات برمجية في مجالات متعددة (ويب، باك إند، موبايل، برمجة عامة). تم تصميمه ليكون سهل الاستخدام، سريع الأداء، وجذاب بصرياً مع حركات سلسة.
-
----
-
-## ✨ الميزات الرئيسية
-
-- ✅ اختبارات مصنفة حسب المجال (Frontend, Backend, Mobile, Programming basics)
-- ✅ واجهة مستخدم حديثة باستخدام **Tailwind CSS** و **GSAP** للحركات
-- ✅ تجربة تطبيق سريعة بفضل **Next.js App Router**
-- ✅ كتابة آمنة باستخدام **TypeScript**
-- ✅ تصميم متجاوب مع جميع الأجهزة
+**CodeExam** is an interactive web application designed to provide fluid programming across various platforms (web, backend, mobile, and general programming). It is designed to be user-friendly, fast, and visually appealing with animations.
 
 ---
 
-## 🛠️ التقنيات المستخدمة
+## ✨ Key Features
 
-| التقنية | الإصدار | الغرض |
-|---------|---------|-------|
-| Next.js | 14 | إطار العمل الأساسي |
-| React | 18 | مكتبة الواجهات |
-| TypeScript | 5 | الأمان والاستقرار |
-| Tailwind CSS | 3.4 | التصميم والتنسيق |
-| GSAP | 3.12 | الحركات والتأثيرات |
+- ✅ Categorized by domain (Front-end, Back-end, Mobile, Programming Fundamentals)
+- ✅ Modern UI using **Tailwind CSS** and **GSAP** for animations
+- ✅ Fast and impressive **Next.js App Router** app experience
+- ✅ Secure writing using **TypeScript**
+- ✅ Responsive design
 
 ---
 
-## 📁 هيكل المشروع (شرح مبسط)
+## 🛠️ Usage Tips
 
-```bash
-my-app/
-├── app/                # مسارات الصفحات (App Router)
-│   ├── layout.tsx      # التخطيط العام
-│   └── page.tsx        # الصفحة الرئيسية
-├── components/         # مكونات قابلة لإعادة الاستخدام
-├── lib/                # دوال وخدمات مساعدة
-├── hooks/              # React Hooks مخصصة
-├── context/            # سياقات React (مثل الثيم، اللغة)
-├── types/              # تعريفات TypeScript
-├── data/               # بيانات وهمية (JSON/TS)
-├── public/             # ملفات ثابتة (صور، خطوط)
-└── styles/             # أنماط CSS إضافية (إن وجدت)
+| Technical | Version | Meat |
+
+|---------|--------|--------|
+
+| Next.js | 14 | Core Framework |
+
+| Reply | 18 | Interface Library |
+
+| TypeScript | 5 | Security |
+
+| Back-end CSS | 3.4 | Design and Formatting |
+
+| GsAP | 3.12 | Gravity and Effects |
