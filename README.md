@@ -1,43 +1,40 @@
-﻿# CodeExam - منصة اختبارات البرمجة
+<div align="center">
+  <h1>📘 CodeExam</h1>
+  <p><strong>Interactive Programming Assessment Platform</strong></p>
+  <p>Test your coding skills in a modern, smooth environment</p>
+  
+  <img src="https://img.shields.io/badge/Next.js-14-black" alt="Next.js 14" />
+  <img src="https://img.shields.io/badge/React-18-blue" alt="React 18" />
+  <img src="https://img.shields.io/badge/TypeScript-5.0-blue" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License" />
+</div>
 
-## 🚀 التقنيات المستخدمة
-- Next.js 14
-- React 18
-- TypeScript
-- Tailwind CSS
-- GSAP
+---
 
-## 📁 هيكل المشروع
+## 📖 About The Project
 
-\\\
-my-app/
-├── app/           # صفحات التطبيق
-├── components/    # المكونات المشتركة
-├── lib/          # دوال مساعدة
-├── hooks/        # Custom Hooks
-├── context/      # React Context
-├── types/        # تعريفات TypeScript
-├── data/         # بيانات مؤقتة
-└── public/       # ملفات ثابتة
-\\\
+**CodeExam** is an interactive web application designed to deliver programming tests across multiple domains (Web, Backend, Mobile, General Programming). It is built to be user‑friendly, high‑performing, and visually engaging with smooth animations.
 
-## 🛠️ التشغيل
+---
 
-1. تثبيت التبعيات:
-\\\ash
-npm install
-\\\
+## ✨ Key Features
 
-2. تشغيل المشروع:
-\\\ash
-npm run dev
-\\\
+- ✅ Tests categorized by domain (Frontend, Backend, Mobile, Programming basics)
+- ✅ Modern UI using **Tailwind CSS** and **GSAP** for animations
+- ✅ Fast app experience thanks to **Next.js App Router**
+- ✅ Type safety with **TypeScript**
+- ✅ Fully responsive design for all devices
 
-3. فتح المتصفح على:
-\\\
-http://localhost:3000
-\\\
+---
 
-## 📝 الترخيص
-MIT
-"# code-exam" 
+## 🛠️ Technologies Used
+
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| Next.js    | 14      | Core framework |
+| React      | 18      | UI library |
+| TypeScript | 5       | Type safety & stability |
+| Tailwind CSS | 3.4  | Styling & layout |
+| GSAP       | 3.12    | Animations & effects |
+
